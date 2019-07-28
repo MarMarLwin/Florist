@@ -1,3 +1,4 @@
 1.Create project in android studio
 2.Click VCS  >> Import into version control >>Create Git Repository
 3.Click VCS >> Checkout from version control>>Git
+4.R-Click on app>>Git>>Repository>>push

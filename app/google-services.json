@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "930168651082",
+    "firebase_url": "https://florist-5be3f.firebaseio.com",
+    "project_id": "florist-5be3f",
+    "storage_bucket": "florist-5be3f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:930168651082:android:3a82b3dd80557e25",
+        "android_client_info": {
+          "package_name": "com.example.floristbypo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "930168651082-m8akjosgk4n3anslducf0q2kt34cupq1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCKGHTII8VjiaMikuR89YAhPFlPlOGWckE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "930168651082-m8akjosgk4n3anslducf0q2kt34cupq1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
