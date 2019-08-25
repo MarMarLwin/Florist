@@ -1,5 +1,7 @@
 package com.example.floristbypo
 
+import android.app.NotificationManager
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
@@ -35,7 +37,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         nav_view.setNavigationItemSelectedListener(this)
 
-
         // Get token
         FirebaseInstanceId.getInstance().instanceId
             .addOnCompleteListener(OnCompleteListener { task ->
@@ -58,6 +59,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 //                }
 //                Log.d(TAG, msg)
 //            }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val notificationManager= getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        notificationManager.cancel(0)
     }
 
     override fun onBackPressed() {
