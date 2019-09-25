@@ -3,20 +3,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.floristbypo.models.Catalog
+import com.example.floristbypo.models.User
+import com.example.floristbypo.repo.CatalogRepository
 
-class CatalogViewModel(): ViewModel() {
-    private val _items = MutableLiveData<List<Catalog>>().apply { value = emptyList() }
+//class CatalogViewModel(
+//    private val catalogRepository: CatalogRepository
+//): ViewModel() {
+class CatalogViewModel:ViewModel(){
+    private val _items = MutableLiveData<List<Catalog>>().apply { value = List<User() > }
     val items: LiveData<List<Catalog>> = _items
-
-    val name= MutableLiveData<String>()
-
-    private val _dataLoading = MutableLiveData<Boolean>()
-    val dataLoading: LiveData<Boolean> = _dataLoading
-
-    private val _currentFilteringLabel = MutableLiveData<Int>()
-    val currentFilteringLabel: LiveData<Int> = _currentFilteringLabel
-
-    private val _noCatalogLabel = MutableLiveData<Int>()
-    val noTasksLabel: LiveData<Int> = _noCatalogLabel
-
 }
