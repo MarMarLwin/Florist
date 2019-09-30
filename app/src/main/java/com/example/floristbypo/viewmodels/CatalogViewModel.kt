@@ -9,6 +9,11 @@ import com.example.floristbypo.repo.CatalogRepository
 //    private val catalogRepository: CatalogRepository
 //): ViewModel() {
 class CatalogViewModel:ViewModel(){
-    private val _items = MutableLiveData<List<Catalog>>().apply { value = emptyList() }
+    private val _items = MutableLiveData<List<Catalog>>().apply { value =
+        mutableListOf(Catalog("c01","Tulip","Tuplip","White",700.0,20.0,
+            "White in color.Height is 110 cm.No scent.It contain 4 or 5 buds."),
+            Catalog("c02","Honesty","Lily(LA)","Orange",1300.0,4.0,
+                "Orange in color.Height 130 cm, 3-5 buds. ")) }
     val items: LiveData<List<Catalog>> = _items
+
 }

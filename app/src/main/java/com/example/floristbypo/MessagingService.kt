@@ -16,7 +16,7 @@ import com.google.firebase.messaging.RemoteMessage
 
 class MessagingService: FirebaseMessagingService() {
     @RequiresApi(Build.VERSION_CODES.O)
-    override fun onMessageReceived(remoteMessage: RemoteMessage?) {
+    override fun onMessageReceived(remoteMessage: RemoteMessage) {
 //        super.onMessageReceived(p0)
         val intent= Intent(this,MainActivity::class.java)
         intent.flags=Intent.FLAG_ACTIVITY_CLEAR_TOP
@@ -49,7 +49,7 @@ class MessagingService: FirebaseMessagingService() {
             startForeground(1,notification)
     }
 
-    override fun onNewToken(p0: String?) {
+    override fun onNewToken(p0: String) {
         super.onNewToken(p0)
     }
 }

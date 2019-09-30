@@ -8,6 +8,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProviders
+import com.example.floristbypo.adapters.CatalogAdapter
+import com.example.floristbypo.databinding.CatalogItemBinding
 import com.example.floristbypo.databinding.FragmentCatalogBinding
 import com.example.floristbypo.databinding.UserProfileFragmentBinding
 import com.example.floristbypo.viewmodels.CatalogViewModel
@@ -29,9 +31,13 @@ private const val ARG_PARAM2 = "param2"
  *
  */
 class CatalogFragment : Fragment() {
-    // TODO: Rename and change types of parameters
+    companion object {
+        fun newInstance()=CatalogFragment()
+    }
+
     private lateinit var viewmodel:CatalogViewModel
     private lateinit var viewDataBinding:FragmentCatalogBinding
+    private lateinit var listAdapter:CatalogAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,9 +45,24 @@ class CatalogFragment : Fragment() {
     ): View? {
         viewmodel = ViewModelProviders.of(this).get(CatalogViewModel::class.java)
         viewDataBinding= FragmentCatalogBinding.inflate(inflater,container,false).apply {
-            viewmodel=viewmodel
+            vModel=viewmodel
         }
         return viewDataBinding.root
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        viewDataBinding.lifecycleOwner = this.viewLifecycleOwner
+        setUpListAdapter()
+    }
+
+    private fun setUpListAdapter(){
+        val viewModel=viewDataBinding.vModel
+        if(viewModel!=null) {
+            listAdapter = CatalogAdapter(viewModel)
+            //catalogRecycler = recyclerViewName
+            viewDataBinding.catalogRecycler.adapter=listAdapter
+        }
     }
 
 }

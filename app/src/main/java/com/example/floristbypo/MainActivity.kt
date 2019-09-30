@@ -106,7 +106,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 replaceFragment(UserProfileFragment.newInstance())
             }
             R.id.nav_catalog -> {
-
+                replaceFragment(CatalogFragment.newInstance())
             }
             R.id.nav_slideshow -> {
 

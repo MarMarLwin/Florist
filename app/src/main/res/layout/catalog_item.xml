@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="catalog"
+            type="com.example.floristbypo.models.Catalog"/>
+        <variable name="viewModel" type="com.example.floristbypo.viewmodels.CatalogViewModel"/>
+    </data>
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_gravity="center_vertical"
+                  android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                  android:text="@{String.valueOf(catalog.name)}"
+                  android:id="@+id/nameTxt"/>
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_gravity="center_vertical"
+                  android:text="@{String.valueOf(catalog.type)}"
+                  android:id="@+id/typeTxt"/>
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_gravity="center_vertical"
+                  android:text="@{String.valueOf(catalog.color)}"
+                  android:id="@+id/colorTxt"/>
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_gravity="center_vertical"
+                  android:text="@{String.valueOf(catalog.price)}"
+                  android:id="@+id/priceTxt"/>
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_gravity="center_vertical"
+                  android:text="@{String.valueOf(catalog.availableQty)}"
+                  android:id="@+id/availableQtyTxt"/>
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_gravity="center_vertical"
+                  android:text="@{String.valueOf(catalog.description)}"
+                  android:id="@+id/descriptionTxt"/>
+    </RelativeLayout>
+</layout>

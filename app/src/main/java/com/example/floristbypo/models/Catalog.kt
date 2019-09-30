@@ -6,11 +6,11 @@ import java.sql.Blob
 data class Catalog(
     var CatalogId:String="",
     var Name:String="",
-    var Type:String?=null,
-    var Color:String?=null,
+    var Type:String?="",
+    var Color:String?="",
     var Price:Double?=0.0,
     var AvailableQty:Double?=0.0,
-    var Description:String?=null,
-    var Photo: Blob?=null
+    var Description:String?=""
+//    var Photo: Blob?=null
 )
 
