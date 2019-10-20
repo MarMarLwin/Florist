@@ -12,11 +12,19 @@ import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.get
 import com.example.floristbypo.databinding.UserProfileFragmentBinding
+import com.example.floristbypo.models.Catalog
+import com.example.floristbypo.viewmodels.CatalogViewModel
 import com.example.floristbypo.viewmodels.UserProfileViewModel
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.iid.FirebaseInstanceId
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
@@ -27,6 +35,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private var TAG="FloristLog"
     private lateinit var binding:UserProfileFragmentBinding
     private lateinit var viewmodel:UserProfileViewModel
+    private lateinit var catalog:CatalogViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -70,6 +79,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 //                }
 //                Log.d(TAG, msg)
 //            }
+    }
+
+    override fun onStart() {
+        super.onStart()
+//        connectFirestoreDB()
     }
 
     override fun onResume() {
@@ -132,5 +146,35 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val fragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.fragmentFrame, fragment)
         fragmentTransaction.commit()
+    }
+
+    fun connectRealtimeDB(){
+        val database= FirebaseDatabase.getInstance()
+        val myRef = database.reference
+
+        val catalogListener = object: ValueEventListener {
+            override fun onCancelled(error: DatabaseError) {
+                Log.w(TAG, "Failed to read value.", error.toException())
+            }
+
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                val value = dataSnapshot.getValue(Catalog::class.java)
+                Log.d(TAG, "Value is: $value")            }
+
+        }
+        myRef.addValueEventListener(catalogListener)
+    }
+
+    fun connectFirestoreDB(){
+        val db= FirebaseFirestore.getInstance()
+        db.collection("Catalog")
+            .get()
+            .addOnSuccessListener { result->
+                for(document in result)
+                    Log.d(TAG, "${document.id} => ${document.data}")
+            }
+            .addOnFailureListener { exception ->
+                Log.w(TAG, "Error getting documents.", exception)
+            }
     }
 }
