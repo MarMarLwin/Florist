@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
         <variable
@@ -7,7 +7,7 @@
             type="com.example.floristbypo.models.Catalog"/>
         <variable name="viewModel" type="com.example.floristbypo.viewmodels.CatalogViewModel"/>
     </data>
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
         <TextView android:layout_width="wrap_content"
@@ -20,26 +20,33 @@
                   android:layout_height="wrap_content"
                   android:layout_gravity="center_vertical"
                   android:text="@{String.valueOf(catalog.type)}"
+                  app:layout_constraintTop_toBottomOf="@+id/nameTxt"
                   android:id="@+id/typeTxt"/>
         <TextView android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:layout_gravity="center_vertical"
                   android:text="@{String.valueOf(catalog.color)}"
+                  app:layout_constraintLeft_toRightOf="@id/typeTxt"
+                  app:layout_constraintTop_toBottomOf="@+id/nameTxt"
                   android:id="@+id/colorTxt"/>
         <TextView android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:layout_gravity="center_vertical"
                   android:text="@{String.valueOf(catalog.price)}"
+                  app:layout_constraintTop_toBottomOf="@id/colorTxt"
                   android:id="@+id/priceTxt"/>
         <TextView android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:layout_gravity="center_vertical"
                   android:text="@{String.valueOf(catalog.availableQty)}"
+                  app:layout_constraintLeft_toRightOf="@id/colorTxt"
+                  app:layout_constraintTop_toBottomOf="@id/colorTxt"
                   android:id="@+id/availableQtyTxt"/>
         <TextView android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:layout_gravity="center_vertical"
                   android:text="@{String.valueOf(catalog.description)}"
+                  app:layout_constraintTop_toBottomOf="@id/availableQtyTxt"
                   android:id="@+id/descriptionTxt"/>
-    </RelativeLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
