@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.floristbypo.adapters.CatalogAdapter
 import com.example.floristbypo.databinding.CatalogItemBinding
@@ -42,23 +43,23 @@ class CatalogFragment : Fragment() {
     private lateinit var viewmodel:CatalogViewModel
     private lateinit var viewDataBinding:FragmentCatalogBinding
     private lateinit var listAdapter:CatalogAdapter
-    private  var catalogs: LiveData<List<Catalog>> = MutableLiveData<List<Catalog>>().apply { value = mutableListOf()}
+    private  var catalogs: MutableLiveData<List<Catalog>> = MutableLiveData<List<Catalog>>().apply { value = mutableListOf()}
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+        savedInstanceState: Bundle?): View? {
         viewmodel = ViewModelProviders.of(this).get(CatalogViewModel::class.java)
-        getCatalog()
-        viewmodel.items=catalogs
+//        viewmodel.items.observe(this, Observer {viewmodel.items=catalogs }
+
+        viewmodel.getCatalogs()
         viewDataBinding= FragmentCatalogBinding.inflate(inflater,container,false).apply {
-            vModel=viewmodel
+        vModel=viewmodel
         }
         return viewDataBinding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewDataBinding.lifecycleOwner = this.viewLifecycleOwner
+       viewDataBinding.lifecycleOwner = this.viewLifecycleOwner
         setUpListAdapter()
     }
 
@@ -71,7 +72,15 @@ class CatalogFragment : Fragment() {
         }
     }
 
-    fun getCatalog(){
+    override fun onStart() {
+        super.onStart()
+//        viewmodel.getCatalogs().observe(this, Observer { setUpListAdapter()})
+//       getCatalog()
+        var catalogObserve= Observer<List<Catalog>> {catalog->listAdapter.notifyDataSetChanged() }
+        viewmodel.items.observe(this, catalogObserve)
+    }
+
+    private fun getCatalog(){
         val database = FirebaseFirestore.getInstance()
     //catalogs=MutableLiveData<List<Catalog>>().apply { value = mutableListOf()}
         database.collection("Catalog")
@@ -88,6 +97,7 @@ class CatalogFragment : Fragment() {
             }
             .addOnFailureListener { exception ->
                 //                Log.w(TAG, "Error getting documents.", exception)
+                catalogs=MutableLiveData<List<Catalog>>().apply { value = mutableListOf()}
             }
     }
 
