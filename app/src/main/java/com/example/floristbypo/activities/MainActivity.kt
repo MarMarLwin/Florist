@@ -1,4 +1,4 @@
-package com.example.floristbypo
+package com.example.floristbypo.activities
 
 import android.app.NotificationManager
 import android.content.Context
@@ -9,11 +9,11 @@ import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
-import androidx.lifecycle.get
+import com.example.floristbypo.R
 import com.example.floristbypo.databinding.UserProfileFragmentBinding
+import com.example.floristbypo.fragments.CatalogFragment
+import com.example.floristbypo.fragments.UserProfileFragment
 import com.example.floristbypo.models.Catalog
 import com.example.floristbypo.viewmodels.CatalogViewModel
 import com.example.floristbypo.viewmodels.UserProfileViewModel
@@ -26,9 +26,9 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.iid.FirebaseInstanceId
+import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
-import kotlinx.android.synthetic.main.nav_header_main.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -37,9 +37,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private lateinit var viewmodel:UserProfileViewModel
     private lateinit var catalog:CatalogViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
+        if(savedInstanceState==null)
         super.onCreate(savedInstanceState)
-
-        setContentView(R.layout.activity_main)
+          setContentView(R.layout.activity_main)
 //        binding=DataBindingUtil.setContentView(this,R.layout.activity_main)
 //        binding.viewmodel= ViewModelProviders.of(this).get(UserProfileViewModel::class.java)
         setSupportActionBar(toolbar)
@@ -50,7 +50,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
 
         val toggle = ActionBarDrawerToggle(
-            this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close
+            this, drawer_layout, toolbar,
+            R.string.navigation_drawer_open,
+            R.string.navigation_drawer_close
         )
         drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
@@ -71,14 +73,15 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             })
 //
 //        //Subscription to the topic News
-//        FirebaseMessaging.getInstance().subscribeToTopic("News")
-//            .addOnCompleteListener { task ->
-//                var msg = "Subscribe_Success"//getString(R.string.msg_subscribed)
-//                if (!task.isSuccessful) {
-//                    msg ="Subscribe_failed"// getString(R.string.msg_subscribe_failed)
-//                }
-//                Log.d(TAG, msg)
-//            }
+        FirebaseMessaging.getInstance().subscribeToTopic("News")
+            .addOnCompleteListener { task ->
+                var msg = "Subscribe_Success"//getString(R.string.msg_subscribed)
+                if (!task.isSuccessful) {
+                    msg ="Subscribe_failed"// getString(R.string.msg_subscribe_failed)
+                }
+                Log.d(TAG, msg)
+            }
+
     }
 
     override fun onStart() {
@@ -122,13 +125,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_catalog -> {
                 replaceFragment(CatalogFragment.newInstance())
             }
-            R.id.nav_slideshow -> {
+            R.id.nav_message -> {
 
             }
-            R.id.nav_manage -> {
+            R.id.nav_camera -> {
 
             }
-            R.id.nav_share -> {
+            R.id.nav_balance -> {
 
             }
             R.id.nav_send -> {

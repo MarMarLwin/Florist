@@ -11,6 +11,7 @@ import android.media.RingtoneManager
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
+import com.example.floristbypo.activities.MainActivity
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 
@@ -18,7 +19,7 @@ class MessagingService: FirebaseMessagingService() {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
 //        super.onMessageReceived(p0)
-        val intent= Intent(this,MainActivity::class.java)
+        val intent= Intent(this, MainActivity::class.java)
         intent.flags=Intent.FLAG_ACTIVITY_CLEAR_TOP
         val contentIntent=PendingIntent.getActivity(this,0,intent,0)
            val notificationBuilder = NotificationCompat.Builder(this, "channel_id")
@@ -26,7 +27,7 @@ class MessagingService: FirebaseMessagingService() {
             .setContentText(remoteMessage.notification?.body)
             .setDefaults(NotificationCompat.DEFAULT_ALL)
             .setPriority(NotificationCompat.PRIORITY_MAX)
-            .setStyle(NotificationCompat.BigTextStyle())
+            .setStyle(NotificationCompat.DecoratedCustomViewStyle())
             .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
             .setSmallIcon(R.drawable.ic_notification_overlay)
             .setAutoCancel(false)
@@ -34,19 +35,23 @@ class MessagingService: FirebaseMessagingService() {
 
         val notification=notificationBuilder.setContentIntent(contentIntent).build()
 
-        val serviceChannel = NotificationChannel("channel_id", "Florist Msg", NotificationManager.IMPORTANCE_HIGH)
-        serviceChannel.enableLights(true)
-        serviceChannel.enableVibration(true)
-        serviceChannel.lightColor = Color.GREEN
-        serviceChannel.vibrationPattern = longArrayOf(300, 300, 300, 300, 300)
-        val manager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        manager.createNotificationChannel(serviceChannel)
 
 //        val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val serviceChannel = NotificationChannel("channel_id", "Florist Msg", NotificationManager.IMPORTANCE_HIGH)
 
-        manager.notify(0, notificationBuilder.build())
-        if(Build.VERSION.SDK_INT >=Build.VERSION_CODES.ECLAIR)
-            startForeground(1,notification)
+            serviceChannel.enableLights(true)
+            serviceChannel.enableVibration(true)
+            serviceChannel.lightColor = Color.GREEN
+            serviceChannel.vibrationPattern = longArrayOf(300, 300, 300, 300, 300)
+            val manager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
+            manager.createNotificationChannel(serviceChannel)
+            manager.notify(0, notificationBuilder.build())
+
+        }
+//        if(Build.VERSION.SDK_INT >=Build.VERSION_CODES.ECLAIR)
+//            startForeground(1,notification)
     }
 
     override fun onNewToken(p0: String) {

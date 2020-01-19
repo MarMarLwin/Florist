@@ -13,16 +13,21 @@
 <FrameLayout
              android:layout_width="match_parent"
              android:layout_height="match_parent"
-             tools:context=".CatalogFragment">
+             tools:context=".fragments.CatalogFragment">
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                android:id="@+id/refreshLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
         <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/catalogRecycler"
                 app:catalogs="@{vModel.items}"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

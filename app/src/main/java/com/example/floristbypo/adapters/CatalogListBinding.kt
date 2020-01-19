@@ -5,7 +5,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.floristbypo.models.Catalog
 
 @BindingAdapter("app:catalogs")
-fun setCatalogs(listView:RecyclerView, items:List<Catalog>)
+fun setCatalogs(listView:RecyclerView, items:List<Catalog?>)
 {
-    (listView.adapter as CatalogAdapter).submitList(items)
+    (listView.adapter as CatalogAdapter).setCatalogList(items as List<Catalog>)
 }

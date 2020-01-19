@@ -1,9 +1,19 @@
 package com.example.floristbypo.models
 
-import java.util.*
+import com.google.gson.annotations.SerializedName
 
-data class User (
-    var Name:String="po po",
-    var Gender:String="Female",
-    var DOB:String="04/11/2019"
-)
+class User {
+    @SerializedName("name")
+    lateinit var name: String
+    @SerializedName("job")
+    lateinit var job: String
+    @SerializedName("id")
+    var id: String? = null
+    @SerializedName("createdAt")
+    var createdAt: String? = null
+
+    fun User(name: String, job: String) {
+        this.name = name
+        this.job = job
+    }
+}

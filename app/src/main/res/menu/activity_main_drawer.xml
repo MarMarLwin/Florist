@@ -11,23 +11,23 @@
         <item
                 android:id="@+id/nav_catalog"
                 android:icon="@drawable/ic_menu_gallery"
-                android:title="Catalog"/>
+                android:title="Catalogs"/>
         <item
-                android:id="@+id/nav_slideshow"
-                android:icon="@drawable/ic_menu_slideshow"
-                android:title="Slideshow"/>
+                android:id="@+id/nav_message"
+                android:icon="@drawable/ic_message"
+                android:title="Message"/>
         <item
-                android:id="@+id/nav_manage"
-                android:icon="@drawable/ic_menu_manage"
-                android:title="Tools"/>
+                android:id="@+id/nav_camera"
+                android:icon="@drawable/ic_menu_camera"
+                android:title="Camera"/>
     </group>
 
     <item android:title="Communicate">
         <menu>
             <item
-                    android:id="@+id/nav_share"
-                    android:icon="@drawable/ic_menu_share"
-                    android:title="Share"/>
+                    android:id="@+id/nav_balance"
+                    android:icon="@drawable/ic_account_balance"
+                    android:title="Balance"/>
             <item
                     android:id="@+id/nav_send"
                     android:icon="@drawable/ic_menu_send"
