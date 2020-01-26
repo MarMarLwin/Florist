@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
-        xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
         <variable
@@ -8,47 +7,104 @@
             type="com.example.floristbypo.models.Catalog"/>
         <variable name="viewModel" type="com.example.floristbypo.viewmodels.CatalogViewModel"/>
     </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-        <TextView android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:layout_gravity="center_vertical"
-                  android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                  android:text="@{String.valueOf(catalog.name)}"
-                  android:id="@+id/nameTxt"
-                tools:ignore="MissingConstraints" />
-        <TextView android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:layout_gravity="center_vertical"
-                  android:text="@{String.valueOf(catalog.type)}"
-                  app:layout_constraintTop_toBottomOf="@+id/nameTxt"
-                  android:id="@+id/typeTxt"/>
-        <TextView android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:layout_gravity="center_vertical"
-                  android:text="@{String.valueOf(catalog.color)}"
-                  app:layout_constraintLeft_toRightOf="@id/typeTxt"
-                  app:layout_constraintTop_toBottomOf="@+id/nameTxt"
-                  android:id="@+id/colorTxt"/>
-        <TextView android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:layout_gravity="center_vertical"
-                  android:text="@{String.valueOf(catalog.price)}"
-                  app:layout_constraintTop_toBottomOf="@id/colorTxt"
-                  android:id="@+id/priceTxt"/>
-        <TextView android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:layout_gravity="center_vertical"
-                  android:text="@{String.valueOf(catalog.availableQty)}"
-                  app:layout_constraintLeft_toRightOf="@id/colorTxt"
-                  app:layout_constraintTop_toBottomOf="@id/colorTxt"
-                  android:id="@+id/availableQtyTxt"/>
-        <TextView android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:layout_gravity="center_vertical"
-                  android:text="@{String.valueOf(catalog.description)}"
-                  app:layout_constraintTop_toBottomOf="@id/availableQtyTxt"
-                  android:id="@+id/descriptionTxt"/>
+
+        <TableLayout
+                android:id="@+id/tableLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imageView3"
+                app:layout_constraintTop_toTopOf="parent">
+
+            <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                <TextView
+                        android:id="@+id/nameTxt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="start"
+                        android:text="@{String.valueOf(catalog.name)}" />
+            </TableRow>
+
+            <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                <TextView
+                        android:id="@+id/typeTxt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="start"
+                        android:ellipsize="end"
+                        android:text="@{String.valueOf(catalog.type)}" />
+
+            </TableRow>
+
+            <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                <TextView
+                        android:id="@+id/colorTxt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="start"
+                        android:ellipsize="end"
+                        android:text="@{String.valueOf(catalog.color)}" />
+            </TableRow>
+
+            <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                <TextView
+                        android:id="@+id/priceTxt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="start"
+                        android:ellipsize="end"
+                        android:text="@{String.valueOf(catalog.price)}" />
+            </TableRow>
+
+            <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                <TextView
+                        android:id="@+id/availableQtyTxt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="start"
+                        android:text="@{String.valueOf(catalog.availableQty)}" />
+            </TableRow>
+
+            <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                <TextView
+                        android:id="@+id/descriptionTxt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="start"
+                        android:text="@{String.valueOf(catalog.description)}" />
+            </TableRow>
+        </TableLayout>
+
+        <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:scaleType="fitXY"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:src="@drawable/florist_icon" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

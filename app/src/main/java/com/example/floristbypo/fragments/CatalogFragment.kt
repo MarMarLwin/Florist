@@ -63,9 +63,11 @@ class CatalogFragment : Fragment() {
         listAdapter = CatalogAdapter()
         viewDataBinding.catalogRecycler.adapter=listAdapter
         viewmodel.itemList.observe(this,Observer{list->
-            if(list!!.isNotEmpty())
+
                 listAdapter.setCatalogList(list)
-            refreshLayout.isRefreshing=false
+                refreshLayout.isRefreshing=false
+
+
         })
     }
 
