@@ -6,7 +6,7 @@ import com.example.floristbypo.models.Catalog
 import com.example.floristbypo.repo.CatalogRepository
 
 class CatalogViewModel:ViewModel() {
-    private val _items = MutableLiveData<List<Catalog>?>().apply { value = mutableListOf() }
+        private val _items = MutableLiveData<List<Catalog>?>().apply { value = mutableListOf() }
 
     var items: MutableLiveData<List<Catalog>?> = _items
     private val repository:CatalogRepository = CatalogRepository()
