@@ -13,13 +13,16 @@ import androidx.fragment.app.Fragment
 import com.example.floristbypo.R
 import com.example.floristbypo.databinding.UserProfileFragmentBinding
 import com.example.floristbypo.fragments.CatalogFragment
+import com.example.floristbypo.fragments.ItemPagingFragment
 import com.example.floristbypo.fragments.UserProfileFragment
 import com.example.floristbypo.models.Catalog
+import com.example.floristbypo.repo.Utils
 import com.example.floristbypo.viewmodels.CatalogViewModel
 import com.example.floristbypo.viewmodels.UserProfileViewModel
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -82,6 +85,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 Log.d(TAG, msg)
             }
 
+
     }
 
     override fun onStart() {
@@ -120,10 +124,17 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         // Handle navigation view item clicks here.
         when (item.itemId) {
             R.id.nav_profile -> {
+                val bundle=Bundle()
+                bundle.putString(FirebaseAnalytics.Param.ITEM_ID,"Profile_Florist")
+                Utils.firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT,bundle)
                 replaceFragment(UserProfileFragment.newInstance())
             }
             R.id.nav_catalog -> {
+                val bundle=Bundle()
+                bundle.putString(FirebaseAnalytics.Param.ITEM_ID,"Catalog_Florist")
+                Utils.firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT,bundle)
                 replaceFragment(CatalogFragment.newInstance())
+                Utils.firebaseAnalytics.setCurrentScreen(this,"Catalog List Screen",null)
             }
             R.id.nav_message -> {
 
@@ -134,8 +145,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_balance -> {
 
             }
-            R.id.nav_send -> {
-
+            R.id.nav_paging -> {
+                replaceFragment(ItemPagingFragment.newInstance())
             }
         }
 

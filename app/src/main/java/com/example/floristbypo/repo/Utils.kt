@@ -16,9 +16,12 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import com.google.firebase.analytics.FirebaseAnalytics
 
 class Utils:AppCompatActivity() {
     companion object {
+        lateinit var firebaseAnalytics: FirebaseAnalytics
+
         var myPermissions = arrayOf(
             Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.VIBRATE,
             Manifest.permission.INTERNET

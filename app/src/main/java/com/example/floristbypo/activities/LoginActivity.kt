@@ -4,11 +4,17 @@ import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import com.example.floristbypo.R
 import com.example.floristbypo.databinding.UserProfileFragmentBinding
+import com.example.floristbypo.models.UserList
 import com.example.floristbypo.repo.APIInterface
 import com.example.floristbypo.repo.Utils
+import com.google.firebase.analytics.FirebaseAnalytics
 import kotlinx.android.synthetic.main.activity_login.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -67,7 +73,12 @@ class LoginActivity : AppCompatActivity() {
 //            }
 //        })
 
+//        FirebaseAnalytics.getInstance(this).setCurrentScreen(this,"MainActicity","")
 
+        Utils.firebaseAnalytics= FirebaseAnalytics.getInstance(this)
+        val bundle=Bundle()
+        bundle.putString(FirebaseAnalytics.Param.ITEM_ID,"LogIn_Florist")
+        Utils.firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT,bundle)
     }
 
 }

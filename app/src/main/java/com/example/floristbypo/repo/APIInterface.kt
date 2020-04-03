@@ -1,6 +1,7 @@
 package com.example.floristbypo.repo
 
 import com.example.floristbypo.models.MultipleResource
+import com.example.floristbypo.models.StackApiResponse
 import com.example.floristbypo.models.User
 import com.example.floristbypo.models.UserList
 import retrofit2.Call
@@ -19,4 +20,10 @@ interface APIInterface {
     @FormUrlEncoded
     @POST("/api/users?")
     abstract fun doCreateUserWithField(@Field("name") name: String, @Field("job") job: String): Call<UserList>
+
+    @GET("/answers")
+    abstract fun getAnswers(@Query("page") page:Int,@Query("pagesize") pagesize:Int, @Query("site") site:String):Call<StackApiResponse?>
+
+
+
 }

@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.floristbypo.databinding.UserProfileFragmentBinding
+import com.example.floristbypo.repo.Utils
 import com.example.floristbypo.viewmodels.UserProfileViewModel
 import kotlinx.android.synthetic.main.user_profile_fragment.*
 import java.text.SimpleDateFormat
@@ -43,12 +44,13 @@ class UserProfileFragment : Fragment() {
                 },now.get(Calendar.YEAR),now.get(Calendar.MONTH),now.get(Calendar.DAY_OF_MONTH)
                 )
                 datePicker.show()
+                Utils.firebaseAnalytics.setUserProperty("dob",dobTxt.text.toString())
             }
 
 
         }
 
-        viewModel.user.observe(this, Observer {
+        viewModel.user.observe(this.viewLifecycleOwner, Observer {
             if(it!=null)
                 viewDataBinding.user = it
         })

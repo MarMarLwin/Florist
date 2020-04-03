@@ -8,7 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.floristbypo.R
 import com.example.floristbypo.databinding.CatalogItemBinding
 import com.example.floristbypo.models.Catalog
+import com.example.floristbypo.repo.Utils
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.catalog_item.view.*
 
 class CatalogAdapter:RecyclerView.Adapter<CatalogAdapter.ViewHolder>() {
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -25,6 +27,9 @@ class CatalogAdapter:RecyclerView.Adapter<CatalogAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val catalogItemBinding= DataBindingUtil.inflate<CatalogItemBinding>(LayoutInflater.from(parent.context),R.layout.catalog_item,parent,false)
 
+        catalogItemBinding.tableLayout.setOnClickListener {
+            Utils.firebaseAnalytics.setUserProperty("favourite_flower",it.nameTxt.text.toString())
+        }
         return ViewHolder(catalogItemBinding)
     }
 
